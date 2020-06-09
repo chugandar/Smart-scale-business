@@ -285,6 +285,15 @@ int main(){
 			i1=num/10;
 			item=items[i1];
 			val=load_cell();
-			
+			sprintf((char*)ms,"%d",val);
+			seven_seg(ms);
+			serialPrintStr((char*)ms);
+			sprintf((char*)msg,"Welcome");
+			serialPrintStr((char*)msg);
+			LCD_CmdWrite(0xc0);LCD_DisplayString((char*)msg);
+			LCD_CmdWrite(0x94);LCD_DisplayString((char*)ms);
+			sprintf((char*)msg,"%s",item);
+			serialPrintStr((char*)msg);
+			LCD_CmdWrite(0xD4);LCD_DisplayString((char*)msg);
 	}
 }
