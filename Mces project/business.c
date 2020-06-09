@@ -255,7 +255,7 @@ int main(){
 	  unsigned int cnt;
 	char *a,*b="abcd",*ms;
 	unsigned char *item;
-	int num,i1,i2;
+	int num,i1,i2,val;
   
  // initialize the peripherals & the board GPIO
 	
@@ -284,6 +284,7 @@ int main(){
 			i2=num%10;
 			i1=num/10;
 			item=items[i1];
+			val=load_cell();
 			
 	}
 }
