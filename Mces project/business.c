@@ -28,6 +28,7 @@ rtc_t rtc;
 unsigned char rowsel=0,colsel=0;
 unsigned char lookup_table[4][4]={{'0','1','2','3'},{'4','5','6','7'},{'8','9','a','b'},{'c','d','e','f'}};
 unsigned char items[][50]={{"Okra"},{"Tinda"},{"Oreo"},{"Soap"}};
+int cost[]={70,50,25,40};
 unsigned  int x=0;
 // ISR Routine to blink LED D7 to indicate project working
 __irq   void  Timer1_ISR(void)
@@ -251,13 +252,14 @@ int load;
 	IO0CLR|=1<<13;
 	return load;
 }
+
 int main(){
     unsigned char msg[100];
 	  unsigned int cnt;
-	char *a,*b="abcd",*ms;
+	char *a,*b="f",*ms;
 	unsigned char *item;
 	int num,i1,i2,val;
-  
+  double bill=0;
  // initialize the peripherals & the board GPIO
 	
     //Board_Init();
@@ -273,7 +275,7 @@ int main(){
 		rtc.hour = 17;rtc.min =  00;rtc.sec =  00;//10:00:00am
     rtc.date = 14;rtc.month = 04;rtc.year = 2020;//07th April 2020
     RTC_SetDateTime(&rtc);  // comment this line after first use
-	while(1){
+	while(strcmp(a,b)){
 		       RTC_GetDateTime(&rtc);//get current date & time stamp
 			sprintf((char *)msg,"time:%2d:%2d:%2d  Date:%2d/%2d/%2d \x0d\xa",(uint16_t)rtc.hour,(uint16_t)rtc.min,(uint16_t)rtc.sec,(uint16_t)rtc.date,(uint16_t)rtc.month,(uint16_t)rtc.year);
 			// use the time stored in the variable rtc for date & time stamping
@@ -296,5 +298,9 @@ int main(){
 			sprintf((char*)msg,"%s",item);
 			serialPrintStr((char*)msg);
 			LCD_CmdWrite(0xD4);LCD_DisplayString((char*)msg);
+			bill+=val*cost[i1];
 	}
+	sprintf((char*)msg,"%lf",bill);
+	serialPrintStr((char*)msg);
+	LCD_CmdWrite(0xD4);LCD_DisplayString((char*)msg);
 }
