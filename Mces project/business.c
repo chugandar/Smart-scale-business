@@ -244,6 +244,7 @@ SystemInit();
 int load_cell()
 {
 int load;
+	IO0DIR|=1<<13;
 	IO0SET|=1<<13;
 	load=adc(1,4);
 	delay_ms(1);
