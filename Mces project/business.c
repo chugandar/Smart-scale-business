@@ -283,6 +283,9 @@ int main(){
 			LCD_CmdWrite(0x80); LCD_DisplayString((char*)msg);
 			delay(2000);
 			a=board();
+			sprintf((char*)msg,"%s",a);
+			serialPrintStr((char*)msg);
+			serialPrint((char*)msg);
 			num=atoi(a);
 			i2=num%10;
 			i1=num/10;
