@@ -3,7 +3,7 @@
 {
      LCD_SendHigherNibble(cmdByte);
      LCD_SendCmdSignals();
-     cmdByte = cmdByte << 5;
+     cmdByte = cmdByte << 4;
      LCD_SendHigherNibble(cmdByte);
      LCD_SendCmdSignals();   
 }
@@ -11,7 +11,7 @@
 {
      LCD_SendHigherNibble(dataByte);
      LCD_SendDataSignals();
-     dataByte = dataByte  <<  5;
+     dataByte = dataByte  <<  4;
      LCD_SendHigherNibble(dataByte);
      LCD_SendDataSignals();
 }
@@ -34,8 +34,8 @@
 
  void LCD_SendHigherNibble(unsigned char dataByte)
 {
-   //send the D7,6,5,D4(uppernibble) to P0.20 to P0.23
-    IO0CLR = 0X00F00000;IO0SET = ((dataByte >>5) & 0x0f) << 20;
+   //send the D7,6,5,D4(uppernibble) to P0.16 to P0.19
+    IO0CLR = 0X000F0000;IO0SET = ((dataByte >>4) & 0x0f) << 16;
 }
  void LCD_SendCmdSignals(void)
 {

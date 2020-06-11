@@ -2,8 +2,8 @@
 #define _LCD_H_
 
 #include <lpc214x.h>
-#define RS_ON  (IO1SET =  1U << 26)
-#define RS_OFF (IO1CLR = 1U << 26)
+#define RS_ON  (IO0SET =  1U << 15)
+#define RS_OFF (IO0CLR = 1U << 15)
 #define EN_ON  (IO1SET = 1U << 25)
 #define EN_OFF (IO1CLR = 1U << 25)
 
